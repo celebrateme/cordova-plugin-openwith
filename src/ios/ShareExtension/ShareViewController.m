@@ -143,6 +143,10 @@
                     suggestedName = [itemProvider valueForKey:@"suggestedName"];
                 }
 
+                if([(NSObject*)item isKindOfClass:[NSURL class]]) {
+                    suggestedName = [(NSURL*)item absoluteString];
+                }
+
                 NSString *uti = @"";
                 NSArray<NSString *> *utis = [NSArray new];
                 if ([itemProvider.registeredTypeIdentifiers count] > 0) {

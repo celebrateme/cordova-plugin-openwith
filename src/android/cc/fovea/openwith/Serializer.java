@@ -32,13 +32,21 @@ class Serializer {
             throws JSONException {
         JSONArray items = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            items = itemsFromClipData(contentResolver, intent.getClipData());
+            //items = itemsFromClipData(contentResolver, intent.getClipData());
         }
         if (items == null || items.length() == 0) {
-            items = itemsFromExtras(contentResolver, intent.getExtras());
+            //items = itemsFromExtras(contentResolver, intent.getExtras());
         }
         if (items == null || items.length() == 0) {
-            items = itemsFromData(contentResolver, intent.getData());
+            //items = itemsFromData(contentResolver, intent.getData());
+        }
+        if (items == null /*|| items.get(0).toString() == "null"*/) {
+            final JSONObject json = new JSONObject();
+            json.put("urltxt", (String) intent.getExtras().getString(Intent.EXTRA_TEXT));
+            json.put("type", (String) "text/url");
+            final JSONObject[] itemstxt = new JSONObject[1];
+            itemstxt[0] = json;
+            items = new JSONArray(itemstxt);
         }
         if (items == null) {
             return null;
