@@ -40,7 +40,7 @@ class Serializer {
         if (items == null || items.length() == 0) {
             //items = itemsFromData(contentResolver, intent.getData());
         }
-        if (items == null /*|| items.get(0).toString() == "null"*/) {
+        if (items == null && intent.getExtras() != null/*|| items.get(0).toString() == "null"*/) {
             final JSONObject json = new JSONObject();
             json.put("urltxt", (String) intent.getExtras().getString(Intent.EXTRA_TEXT));
             json.put("type", (String) "text/url");
